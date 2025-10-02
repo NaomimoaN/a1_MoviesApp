@@ -1,7 +1,11 @@
 // API Configuration for The Movie Database (TMDb)
 // Replace YOUR_API_KEY_HERE with your actual API key from https://www.themoviedb.org/
 
-const API_KEY = process.env.TMDB_API_KEY;
+// Use environment variable if available, otherwise fall back to direct value
+const API_KEY = process.env.TMDB_API_KEY || "0e777a0e5d79510caa8f88002a7afcd2";
+
+// Debug: Check if API key is loaded
+console.log("API_KEY loaded:", API_KEY ? "Yes" : "No");
 const BASE_URL = "https://api.themoviedb.org/3";
 
 // API Endpoints
