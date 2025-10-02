@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import CustomDropdown from "./CustomDropdown";
 
 const SearchForm = ({
   searchQuery,
@@ -21,6 +21,10 @@ const SearchForm = ({
   ],
   headerColor = "#FF9500",
 }) => {
+  const handleSearchTypeChange = (type) => {
+    console.log("Search type changed to:", type);
+    setSearchType(type);
+  };
   return (
     <View style={styles.container}>
       <Text style={[styles.headerTitle, { color: "white" }]}>Search</Text>
@@ -42,21 +46,12 @@ const SearchForm = ({
         </TouchableOpacity>
       </View>
 
-      <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={searchType}
-          style={styles.picker}
-          onValueChange={setSearchType}
-        >
-          {searchTypes.map((type) => (
-            <Picker.Item
-              key={type.value}
-              label={type.label}
-              value={type.value}
-            />
-          ))}
-        </Picker>
-      </View>
+      <CustomDropdown
+        options={searchTypes}
+        selectedValue={searchType}
+        onValueChange={handleSearchTypeChange}
+        style={styles.pickerContainer}
+      />
     </View>
   );
 };
@@ -96,12 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   pickerContainer: {
-    backgroundColor: "white",
-    borderRadius: 8,
-    overflow: "hidden",
-  },
-  picker: {
-    height: 50,
+    marginTop: 0,
   },
 });
 

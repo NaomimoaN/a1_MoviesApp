@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, ActivityIndicator, Alert } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import { API_ENDPOINTS, makeApiRequest } from "../config/api";
 import MovieItem from "../components/MovieItem";
 import Pagination from "../components/Pagination";
+import CustomDropdown from "../components/CustomDropdown";
 import { commonStyles, tabStyles } from "../styles/styles";
 
 const TVScreen = ({ navigation }) => {
@@ -39,6 +39,12 @@ const TVScreen = ({ navigation }) => {
     try {
       setLoading(true);
       const endpoint = getEndpoint(category);
+      console.log(
+        "Fetching TV shows for category:",
+        category,
+        "endpoint:",
+        endpoint
+      );
       const response = await makeApiRequest(endpoint, { page: pageNum });
 
       if (pageNum === 1) {
@@ -62,6 +68,7 @@ const TVScreen = ({ navigation }) => {
   }, []);
 
   const handleCategoryChange = (category) => {
+    console.log("TV Category changed to:", category);
     setSelectedCategory(category);
     setPage(1);
     fetchTVShows(category, 1);
@@ -99,21 +106,12 @@ const TVScreen = ({ navigation }) => {
         ]}
       >
         <Text style={commonStyles.headerTitle}>TV Shows</Text>
-        <View style={commonStyles.pickerContainer}>
-          <Picker
-            selectedValue={selectedCategory}
-            style={commonStyles.picker}
-            onValueChange={handleCategoryChange}
-          >
-            {tvCategories.map((category) => (
-              <Picker.Item
-                key={category.value}
-                label={category.label}
-                value={category.value}
-              />
-            ))}
-          </Picker>
-        </View>
+        <CustomDropdown
+          options={tvCategories}
+          selectedValue={selectedCategory}
+          onValueChange={handleCategoryChange}
+          style={commonStyles.pickerContainer}
+        />
       </View>
 
       {loading && tvShows.length === 0 ? (

@@ -55,9 +55,13 @@ export const commonStyles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 8,
     overflow: "hidden",
+    borderWidth: 1,
+    borderColor: colors.lightGray,
   },
   picker: {
     height: 50,
+    color: colors.black,
+    backgroundColor: colors.white,
   },
   listContainer: {
     padding: spacing.sm,
