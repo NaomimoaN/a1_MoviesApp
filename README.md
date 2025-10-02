@@ -36,10 +36,13 @@ A comprehensive movies and TV shows app built with React Native and Expo, using 
 4. Copy your API key
 
 ### 2. Configure API Key
-1. Open `config/api.js`
-2. Replace `YOUR_API_KEY_HERE` with your actual API key:
-   ```javascript
-   const API_KEY = "your_actual_api_key_here";
+1. Copy the environment template:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open `.env` and replace `your_api_key_here` with your actual API key:
+   ```
+   TMDB_API_KEY=your_actual_api_key_here
    ```
 
 ### 3. Install Dependencies
